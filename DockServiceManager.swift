@@ -1,6 +1,6 @@
 #!/usr/bin/swift
 
-// version 1.0
+// version 0.1
 
 import Cocoa
 
