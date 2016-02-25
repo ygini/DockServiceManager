@@ -481,7 +481,7 @@
 												<key>GID</key>
 												<integer>0</integer>
 												<key>PATH</key>
-												<string>src/DockServiceManager.swift</string>
+												<string>vendors/dockutil/scripts/dockutil</string>
 												<key>PATH_TYPE</key>
 												<integer>1</integer>
 												<key>PERMISSIONS</key>
@@ -497,7 +497,7 @@
 												<key>GID</key>
 												<integer>0</integer>
 												<key>PATH</key>
-												<string>vendors/dockutil/scripts/dockutil</string>
+												<string>src/main.swift</string>
 												<key>PATH_TYPE</key>
 												<integer>1</integer>
 												<key>PERMISSIONS</key>
@@ -570,6 +570,13 @@
 		</dict>
 		<key>PACKAGE_SCRIPTS</key>
 		<dict>
+			<key>POSTINSTALL_PATH</key>
+			<dict>
+				<key>PATH</key>
+				<string>src/postinstall.sh</string>
+				<key>PATH_TYPE</key>
+				<integer>1</integer>
+			</dict>
 			<key>RESOURCES</key>
 			<array/>
 		</dict>
@@ -584,7 +591,7 @@
 			<key>OVERWRITE_PERMISSIONS</key>
 			<false/>
 			<key>VERSION</key>
-			<string>0.1</string>
+			<string>0.2</string>
 		</dict>
 		<key>PROJECT_COMMENTS</key>
 		<dict>

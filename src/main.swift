@@ -4,12 +4,14 @@
 
 import Cocoa
 
+var run = true
 let preferenceDomain = "com.abelionni.DockServiceManager"
+let defaults = NSUserDefaults(suiteName: preferenceDomain)
 
-NSNotificationCenter.defaultCenter().addObserverForName(NSUserDefaultsDidChangeNotification, object: nil, queue: nil) { (notification) -> Void in
+
+
+func handleSettingsUpdates() {
     print("Applying settings from " + preferenceDomain)
-    
-    let defaults = NSUserDefaults(suiteName: preferenceDomain)
     
     for item in (defaults?.arrayForKey("dockitems") as? [[String:String]])! {
         var args = [String]()
@@ -34,13 +36,24 @@ NSNotificationCenter.defaultCenter().addObserverForName(NSUserDefaultsDidChangeN
         }
         
         print("Running dockutil with ", args)
-        var dockutil = NSTask.launchedTaskWithLaunchPath("/usr/local/DockServiceManager/dockutil", arguments: args)
+        let dockutil = NSTask.launchedTaskWithLaunchPath("/usr/local/DockServiceManager/dockutil", arguments: args)
         
         dockutil.waitUntilExit()
     }
 }
 
-NSNotificationCenter.defaultCenter().postNotificationName(NSUserDefaultsDidChangeNotification, object: nil)
+NSDistributedNotificationCenter.defaultCenter().addObserverForName("com.apple.MCX._managementStatusChangedForDomains", object: "com.apple.MCX", queue: nil) { (note) -> Void in
+    
+    let potentialDomains = note.userInfo!["com.apple.MCX.changedDomains"] as? [String]
+    
+    if let domains = potentialDomains {
+        if domains.contains("com.abelionni.DockServiceManager") {
+            handleSettingsUpdates()
+        }
+    }
+}
+
+//NSNotificationCenter.defaultCenter().postNotificationName(NSUserDefaultsDidChangeNotification, object: nil)
 
 let runLoop = NSRunLoop.currentRunLoop()
 runLoop.run()
