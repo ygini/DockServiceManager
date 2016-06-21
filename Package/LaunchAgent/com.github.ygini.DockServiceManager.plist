@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.abelionni.DockServiceManager</string>
+	<string>com.github.ygini.DockServiceManager</string>
 	<key>KeepAlive</key>
 	<true/>
 	<key>Program</key>
-	<string>/usr/local/DockServiceManager/DockServiceManager.swift</string>
+	<string>/Library/Application Support/com.github.ygini.DockServiceManager/DockServiceManager.app/Contents/MacOS/DockServiceManager</string>
 </dict>
 </plist>
