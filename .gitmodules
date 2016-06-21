@@ -1,0 +1,3 @@
+[submodule "vendors/dockutil"]
+	path = vendors/dockutil
+	url = https://github.com/kcrawford/dockutil.git
