@@ -1,15 +1,37 @@
 # DockServiceManager
 
-This service allow a system administrator to remotely execute dockutil command via MDM.
+This service allows a system administrator to remotely execute dockutil command via MDM.
 
-The service run as a LaunchAgent and read its settings inside com.abelionni.DockServiceManager preference domain. The dockitems key in this preference domain contain an array of dictionary composed by keys used by dockutils.
+The service runs as a LaunchAgent and read its settings inside com.github.ygini.DockServiceManager preference domain. The dockitems key in this preference domain contain an array of dictionaries composed by keys used by dockutils.
 
-The service run all commands and login and each time a changement is done. Currently, only MDM based update are catched. If you modify the settings with defaults it wont be seen by the service (but applied at the next login time if the settings are persistent).
+The service runs all commands at login and each time a change is made. Currently, only MDM based update are caught. If you modify the settings with defaults, it won’t be seen by the service (but applied at the next login time if the settings are persistent).
 
-# Note about the swift script based thing
+10.9 or better is needed for this tool since it's written in Swift (not sure if it's a good idea but we will see).
 
-For fun, this project as been written to be a swift script instead of python script or regular OS X app.
+When using add verbs with dockutil, DockServiceManager allow you to specify full path for app or app BundleID. If you use BundleID, it will use NSWorkspace API to find the best candidate.
 
-The best solution for the future would be to provide this service as a Cocoa app (written in any kind of language) since it will allow a better ressource manangement and would avoid any manual runloop management.
+# Sample settings
 
-The current implementation has been made as a test, to see where we can go with swift based script in IT.
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>dockitems</key>
+	<array>
+		<dict>
+			<key>add</key>
+			<string>com.microsoft.Outlook</string>
+			<key>position</key>
+			<string>end</string>
+		</dict>
+		<dict>
+			<key>add</key>
+			<string>/Applications/Managed Software Center.app</string>
+			<key>position</key>
+			<string>beginning</string>
+		</dict>
+	</array>
+</dict>
+</plist>
+```
